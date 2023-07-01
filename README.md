@@ -1,1 +1,0 @@
-# auto-generated-application-test

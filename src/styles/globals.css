@@ -1,0 +1,52 @@
+/* Reset some default browser styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Global styles for the application */
+body {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Styles for the business idea input */
+#businessIdeaInput {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/* Styles for the MVV display */
+#mvvDisplay {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* Styles for the form */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles for the submit button */
+button[type="submit"] {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0051bb;
+}

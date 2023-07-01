@@ -1,31 +1,22 @@
-```typescript
-import axios from 'axios';
+import { OpenAI } from 'openai';
 import { MVV } from '../types/index';
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Authorization': `Bearer ${OPENAI_API_KEY}`
+export const openaiAPI = {
+  async convertIdeaToMVV(idea: string): Promise<MVV> {
+    const gpt3Response = await openai.complete({
+      engine: 'davinci',
+      prompt: `Convert the following business idea into a mission, vision, and values framework:\n\n${idea}`,
+      max_tokens: 200,
+    });
+
+    const mvv = gpt3Response.data.choices[0].text.trim();
+
+    return {
+      mission: mvv.split('\n')[0],
+      vision: mvv.split('\n')[1],
+      values: mvv.split('\n')[2],
+    };
+  },
 };
-
-export const convertToMVV = async (businessIdea: string): Promise<MVV> => {
-  const prompt = `Convert the following business idea into a Mission, Vision, and Values framework: ${businessIdea}`;
-
-  const data = {
-    'prompt': prompt,
-    'max_tokens': 200
-  };
-
-  const response = await axios.post(OPENAI_API_URL, data, { headers: headers });
-
-  const mvv: MVV = {
-    mission: response.data.choices[0].text.split('\n')[0],
-    vision: response.data.choices[0].text.split('\n')[1],
-    values: response.data.choices[0].text.split('\n')[2]
-  };
-
-  return mvv;
-};
-```
